@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+
+<!-- Bu satır, Thymeleaf'in XML Namespaces için kullanılan prefix'ini belirtir.
+     Bu sayede, th:text gibi Thymeleaf'e özgü öğeleri tanımlayabiliriz. -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- HTML sayfanızın başlığı burada tanımlanmıştır. -->
+    <title>Thymeleaf Demo</title>
+</head>
+<body>
+<!-- Sayfanın içeriği burada tanımlanmıştır. -->
+Hello World of Spring!
+
+<br><br>
+
+<!-- 'param.studentName' ifadesi ile formdan gelen 'studentName' parametresinin değerini ekranda gösterir -->
+Student name: <span th:text="${param.studentName}"></span>
+
+</body>
+</html>
