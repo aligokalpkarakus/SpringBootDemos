@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Confirmation</title>
+</head>
+<body>
+
+<h3>Student Confirmation</h3>
+
+The student is confirmed:
+<!--        calls student.getFirstName()    calls student.getLastName()     -->
+          <span th:text="${student.firstName} + ' ' + ${student.lastName}"/>
+
+<br><br>
+                 <!--calls student.getCountry()-->
+Country:  <span th:text="${student.country}"/>
+
+<br><br>
+                                       <!--calls student.getFavoriteLanguage()-->
+Favorite Programming Language:  <span th:text="${student.favoriteLanguage}"/>
+
+<br><br>
+
+<!--calls student.getFavoriteOperatingSystem()-->
+Favorite Operating System:
+<ul>
+     <!-- unordered list (bullet list)-->
+     <!-- list item  <li> -->
+     <!-- gelen element bir liste olduğu için onu each ile for döngüsüne sokuyoruz, tempSystem ile geçici değişken
+     oluşturarak elemanları yazdırıyoruz -->
+    <li th:each="tempSystem : ${student.favoriteOperatingSystems}" th:text="${tempSystem}"/>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+
+<!-- Bu satır, Thymeleaf'in XML Namespaces için kullanılan prefix'ini belirtir.
+     Bu sayede, th:text gibi Thymeleaf'e özgü öğeleri tanımlayabiliriz. -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- HTML sayfanızın başlığı burada tanımlanmıştır. -->
+    <title>Thymeleaf Demo</title>
+
+    <!-- CSS dosyasına referans veriyoruz. "th:href" Thymeleaf'e özgü bir ifade olup,
+         uygulamanın context path'ine göre CSS dosyasının yolunu otomatik olarak ayarlar.
+         @ sembolü, uygulamanızın context path'ini temsil eder. -->
+    <link rel="stylesheet"
+          th:href="@{/css/demo.css}"/>
+</head>
+
+<body>
+    <!-- "th:text" ifadesi, Thymeleaf tarafından kullanılır ve "theDate" modeli
+         sayesinde sunucudan gelen tarihi ve zamanı bu paragrafa yazdırır.
+         ${theDate} ifadesi, Java modelindeki "theDate" değişkenini temsil eder. -->
+
+    <!-- "class='funny'" ifadesi, bu paragrafın stilini ayarlamak için kullanılır.
+         "funny" sınıfı, demo.css dosyasında tanımlanmış olup, italik yazı stili ve
+         crimson rengini uygulayan bir CSS sınıfıdır. -->
+    <p th:text="'Time on the server is ' + ${theDate}" class="funny"></p>
+
+
+</body>
+
+</html>

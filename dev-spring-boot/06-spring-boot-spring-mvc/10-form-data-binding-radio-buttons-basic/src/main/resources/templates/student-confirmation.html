@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Confirmation</title>
+</head>
+<body>
+
+<h3>Student Confirmation</h3>
+
+The student is confirmed:
+<!--        calls student.getFirstName()    calls student.getLastName()     -->
+          <span th:text="${student.firstName} + ' ' + ${student.lastName}"/>
+
+<br><br>
+                 <!--calls student.getCountry()-->
+Country:  <span th:text="${student.country}"/>
+
+<br><br>
+                                       <!--calls student.getFavoriteLanguage()-->
+Favorite Programming Language:  <span th:text="${student.favoriteLanguage}"/>
+
+</body>
+</html>

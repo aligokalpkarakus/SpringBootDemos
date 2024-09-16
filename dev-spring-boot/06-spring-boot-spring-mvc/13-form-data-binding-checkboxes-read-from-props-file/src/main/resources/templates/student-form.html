@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Form</title>
+</head>
+<body>
+
+<h3>Student Registration Form</h3>
+
+<!--
+    Form yüklendiğinde, Spring MVC modelden 'student' nesnesini alacak ve
+    student.getFirstName() ve student.getLastName() metodlarını çağırarak değerleri ekrana yazdıracaktır.
+-->
+<!--
+    Form gönderildiğinde, Spring MVC yeni bir 'student' nesnesi oluşturacak
+    ve modele ekleyerek student.setFirstName() ve student.setLastName() metodlarını çağıracaktır.
+-->
+
+<form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
+
+    <!--
+        th:field ile modeldeki student nesnesinin firstName alanını bağlarız.
+        *{..} kısayol syntaxıdır ve ${student.firstName} yerine kullanılır.
+    -->
+    First name: <input type="text" th:field="*{firstName}">
+
+    <br><br>
+
+    <!--
+        Aynı şekilde, th:field ile modeldeki student nesnesinin lastName alanını bağlarız.
+    -->
+    Last name: <input type="text" th:field="*{lastName}">
+
+    <br><br>
+
+    <!-- Drop down list'te value sent during form submission, and its right there is the word displayed to user.-->
+    <!-- Student bilgisi girerken mesela Türkiye yazıyor onu seçtiğimizde ve bilgileri göreceğimiz zaman Turkey yazıyor.-->
+
+    Country:
+            <!--Sırasıyla-->
+            <!--binding property on student object-->
+            <!--for döngüsü-->
+            <!--gönderilen değer-->
+            <!--displayed to user-->
+    <select th:field="*{country}">
+        <option th:each="tempCountry: ${countries}"
+                th:value="${tempCountry}"
+                th:text="${tempCountry}"/>
+
+    </select>
+
+    <br><br>
+
+    Favorite Programming Language:
+                        <!--Sırasıyla-->
+                        <!--binding property on student object-->
+                        <!--for döngüsü-->
+                        <!--gönderilen değer-->
+                        <!--displayed to user-->
+    <input type="radio" th:field="*{favoriteLanguage}"
+                        th:each="tempLanguage: ${languages}"
+                        th:value="${tempLanguage}"
+                        th:text="${tempLanguage}"/>
+
+    <br><br>
+
+    Favorite Operating Systems:
+                           <!--Sırasıyla-->
+                           <!--binding property on student object-->
+                           <!--for döngüsü-->
+                           <!--gönderilen değer-->
+                           <!--displayed to user-->
+    <input type="checkbox" th:field="*{favoriteOperatingSystems}"
+                           th:each="tempSystem: ${systems}"
+                           th:value="${tempSystem}"
+                           th:text="${tempSystem}"/>
+
+    <br><br>
+
+    <!--
+        Formu göndermek için bir submit butonu kullanıyoruz.
+    -->
+    <input type="submit" value="Submit"/>
+
+</form>
+
+</body>
+</html>

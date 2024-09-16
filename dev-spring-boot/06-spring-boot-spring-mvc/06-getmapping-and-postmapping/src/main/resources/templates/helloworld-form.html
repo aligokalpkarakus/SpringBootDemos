@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+
+<!-- Bu satır, Thymeleaf'in XML Namespaces için kullanılan prefix'ini belirtir.
+     Bu sayede, th:text gibi Thymeleaf'e özgü öğeleri tanımlayabiliriz. -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World - Input Form</title>
+</head>
+<body>
+<!-- Formun verilerini /processForm URL'ine GET yöntemi ile gönderecek. -->
+
+<!-- helloworld-process'te görmek istediğim versiyon için buradan ayarla. -->
+<!--<form th:action="@{/processForm}" method="GET">-->
+<!--<form th:action="@{/processFormVerTwo}" method="GET">-->
+<form th:action="@{/processFormVerThree}" method="POST">
+
+    <!-- Kullanıcının adını girmesi için bir metin girişi alanı. -->
+    <input type="text" name="studentName"
+           placeholder="What's your name?">
+
+    <!-- Formu göndermek için bir gönder düğmesi. -->
+    <input type="submit">
+
+</form>
+
+</body>
+</html>
