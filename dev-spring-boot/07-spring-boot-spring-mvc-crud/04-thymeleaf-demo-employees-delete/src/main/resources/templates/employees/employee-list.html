@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Directory</title>
+
+    <!-- Sayfanın mobil uyumlu olması için gerekli olan meta etiketi -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS kütüphanesini dahil ediyoruz, bu kütüphane sayfanın tasarımını kolayca şekillendirmemizi sağlar. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!-- Bootstrap ile ortalanmış bir container yapısı oluşturuyoruz, bu sayede içerikler sayfanın ortasında düzgün görünür. -->
+<div class="container">
+
+    <!-- Başlık kısmı: Employee Directory olarak görünecek. -->
+    <h3>Employee Directory</h3>
+    <hr> <!-- Bu satır sayfanın başlık kısmını çizgi ile ayırır. -->
+
+    <!-- "Add Employee" butonu -->
+    <!-- @ symbol Reference context path of your application. -->
+    <!-- @{} ifadesi, Thymeleaf tarafından kullanılır ve uygulamanın kök yoluna referans verir. -->
+    <!-- Bu butona tıkladığında, kullanıcının "/employees/showFormForAdd" yoluna yönlendirilmesi sağlanır. -->
+    <!--<a>: Bu, HTML'deki bir bağlantı etiketidir. Ancak burada,
+     Thymeleaf th:href özelliği kullanılarak bir URL'ye yönlendirilir.-->
+    <a th:href="@{/employees/showFormForAdd}"
+       class="btn btn-primary btn-sm mb-3">
+        Add Employee
+    </a>
+
+
+    <!-- Bootstrap'in 'table', 'table-bordered', 'table-striped' sınıfları tabloyu düzenler: çerçeveli ve sıralı stil sağlar. -->
+    <table class="table table-bordered table-striped">
+        <!-- Siyah arkaplan üzerinde First Name ------- Last Name ------- Email yazdıran kısım. -->
+        <thead class="table-dark">
+        <tr>
+            <!-- Tablo başlıkları -->
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!-- loop over the list of employees. "tempEmployee" is the temp loop variable -->
+        <!-- ${employees} ile Java tarafında modeli temsilen çalışanların listesi alınır ve her bir çalışan için tempEmployee geçici değişkeni kullanılarak tablo satırları oluşturulur.-->
+        <tr th:each="tempEmployee : ${employees}">
+
+            <!-- Çalışanın firstName (ad) bilgisi bu hücrede gösterilir. -->
+            <td th:text="${tempEmployee.firstName}" ></td>
+            <!-- Çalışanın lastName (soyad) bilgisi bu hücrede gösterilir. -->
+            <td th:text="${tempEmployee.lastName}" ></td>
+            <!-- Çalışanın email bilgisi bu hücrede gösterilir. -->
+            <td th:text="${tempEmployee.email}" ></td>
+            <!-- action buttons -->
+            <td>
+                <!-- UPDATE BUTTON -->
+                <!-- update tıklandığında kullanıcının id'sini alır ve o URL'ye yönlendirir.
+                     URL'ye ?employeeId=xxx parametresini ekler ve böylece ilgili çalışan güncelleme formuna yönlendirilir. -->
+                <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+
+                <!-- DELETE BUTTO -->
+                <!-- delete tıklandığında kullanıcının id'sini alır ve o URL'ye yönlendirir.
+                     URL'ye ?employeeId=xxx parametresini ekler ve böylece ilgili çalışan silinir. -->
+                <!-- emin misiniz sorusu için JavaScript prompt'u kullanıyoruz "onclick" -->
+                <a th:href="@{/employees/delete(employeeId=${tempEmployee.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                    Delete
+                </a>
+            </td>
+
+            <!--   ALTERNATİF DELETE VE UPDATE BUTONLARI
+            <td>
+					<div class="row">
+
+						<div class="col-small">
+
+                            UPDATE
+                            <form action="#" th:action="@{/employees/showFormForUpdate}" method="POST">
+
+                                <input type="hidden" name="employeeId" th:value="${tempEmployee.id}" />
+                                <button type="submit" class="btn btn-info btn-sm me-1" style="float:left;">Update</button>
+
+                            </form>
+
+                            DELETE
+                            <form action="#" th:action="@{/employees/delete}" method="POST">
+
+                                <input type="hidden" name="employeeId" th:value="${tempEmployee.id}" />
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                                    Delete
+                                </button>
+
+                            </form>
+                        </div>
+
+                    </div>
+            </td>
+            -->
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
