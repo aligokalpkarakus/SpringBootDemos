@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gokalp Company Home Page</title>
+</head>
+<body>
+    <h2>Gokalp Company Home Page</h2>
+    <hr>
+    <p>
+        Welcome to the home page.
+    </p>
+
+    <!-- Add a logout button -->
+    <!-- By default, must use POST for logout. It sends data to Spring sec. -->
+    <form action="#" th:action="@{/logout}" method="POST">
+
+        <input type="submit" value="Logout" />
+
+    </form>
+
+</body>
+</html>
