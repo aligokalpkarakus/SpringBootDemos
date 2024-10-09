@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Gokalp Company Home Page</title>
+</head>
+<body>
+    <h2>Gokalp Company Home Page</h2>
+    <hr>
+    <p>
+        Welcome to the home page.
+    </p>
+
+    <hr>
+
+    <!-- Display username and role -->
+    <p>
+        <!-- oturum açmış olan kullanıcının user ID'sini gösterecek -->
+        User: <span sec:authentication="principal.username" ></span>
+        <br><br>
+        <!-- oturum açmış olan kullanıcının rollerini gösterecek.-->
+        Role(s): <span sec:authentication="principal.authorities"></span>
+
+    </p>
+
+    <hr>
+
+    <!-- Managers için Leadership Meeting'e yönlendiren bir bağlantı ekliyoruz -->
+    <!-- Burayı sadece Manager'lar görebilir -->
+    <!-- sec ile kullandığımız için web'de kaynak kodunu da göremezler -->
+    <div sec:authorize="hasRole('MANAGER')">
+        <p>
+            <!-- @{} ifadesi Thymeleaf tarafından kullanılır ve burada "/leaders" yoluna yönlendirme yapılır -->
+            <a th:href="@{/leaders}">Leadership Meeting</a>
+            <!-- Bağlantının açıklaması: Yalnızca yöneticiler için erişilebileceğini belirtiyoruz -->
+            (Only for Manager Peeps)
+        </p>
+
+        <hr>
+    </div>
+
+
+
+    <!-- Admin için yönlendiren bir bağlantı ekliyoruz -->
+    <!-- Burayı sadece Admin'ler görebilir -->
+    <!-- sec ile kullandığımız için web'de kaynak kodunu da göremezler -->
+    <div sec:authorize="hasRole('ADMIN')">
+        <p>
+            <!-- @{} ifadesi Thymeleaf tarafından kullanılır ve burada "/systems" yoluna yönlendirme yapılır -->
+            <a th:href="@{/systems}">IT Systems Meeting</a>
+            <!-- Bağlantının açıklaması: Yalnızca admin için erişilebileceğini belirtiyoruz -->
+            (Only for Admin Peeps)
+        </p>
+
+        <hr>
+    </div>
+
+    <!-- Add a logout button -->
+    <!-- By default, must use POST for logout. It sends data to Spring sec. -->
+    <form action="#" th:action="@{/logout}" method="POST">
+
+        <input type="submit" value="Logout" />
+
+    </form>
+
+</body>
+</html>
